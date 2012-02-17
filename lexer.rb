@@ -59,13 +59,10 @@ class Lexer < Racc::Parser
     token = case @state
     when nil
       case
-      when (text = @ss.scan(/[\s\t]+/))
+      when (text = @ss.scan(/[ \t]+/))
         ;
 
       when (text = @ss.scan(/\#.*$/))
-        ;
-
-      when (text = @ss.scan(/\\\\/))
         ;
 
       when (text = @ss.scan(/\d+/))
@@ -73,6 +70,9 @@ class Lexer < Racc::Parser
 
       when (text = @ss.scan(/\"[^"]*\"/))
          action { [:STRING, text[1..-2]] }
+
+      when (text = @ss.scan(/\n+/))
+         action { [:NEWLINE, text] }
 
       when (text = @ss.scan(/end/))
          action { [:END, text] }

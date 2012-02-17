@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby -s
+# Lebowski interpreter
+$:.unshift File.expand_path("..", __FILE__)
+require "interpreter"
+require "readline"
+
+if $h # -h option
+  abort <<USAGE
+Usage:
+
+  ./lebowski # start REPL
+  ./lebowski file.rb
+  ./lebowski -e='code'
+
+USAGE
+end
+
+# Eval some code
+# $e = # -e option
+if $e
+  Interpreter.new.eval($e)
+
+elsif ARGV.first
+  Interpreter.new.eval(File.read(ARGV.first))
+
+# Start the REPL, read-eval-print-loop, or interactive interpreter
+else
+  puts "Lebowski REPL, CTRL+C to quit"
+  interpreter = Interpreter.new
+  loop do
+    line = Readline::readline(">> ")
+    Readline::HISTORY.push(line)
+    begin
+      result = interpreter.eval(line).ruby_value
+      puts "=> #{result.inspect}"
+    rescue => error
+      puts error
+    end
+  end
+
+end

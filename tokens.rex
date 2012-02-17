@@ -2,14 +2,17 @@
 
 class Lexer 
 
+macro
+  BLANK      [\ \t]+
+
 rule
- [\s\t]+      # Whitespace is nothing 
+ {BLANK}      # Whitespace is nothing 
  \#.*$        # Comment is nothing
- \\\\         # \\ is nothing either
  
  #Literals
  \d+          { [:NUMBER, text.to_i] }
  \"[^"]*\"    { [:STRING, text[1..-2]] }
+ \n+          { [:NEWLINE, text] }
 
  # Keywords
  end           { [:END, text] }
