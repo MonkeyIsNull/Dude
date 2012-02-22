@@ -1,0 +1,4 @@
+function foo()
+  print("Am I the only one around here who gives a shit about the rules?")
+end
+foo()

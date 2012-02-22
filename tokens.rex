@@ -28,13 +28,14 @@ rule
  [a-z]\w*                              { [:IDENTIFIER, text] }
   
  # Special operators
-  \|\|                                  { [text, text] }
-  &&                                    { [text, text] }
-  ==                                    { [text, text] }
-  !=                                    { [text, text] }
-  >=                                    { [text, text] }
-  <=                                    { [text, text] }
-
+  or                                    { [text, text] }
+  and                                   { [text, text] }
+  equals                                { [text, text] }
+  not                                   { [text, text] }
+  greaterthan                           { [text, text] }
+  lessthan                              { [text, text] }
+  greq                                  { [text, text] }
+  lesseq                                { [text, text] }
   #catch all
   .                                     { [text, text] } # + => ["+", "+"]
 

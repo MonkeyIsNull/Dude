@@ -15,13 +15,13 @@ token END
 # Based on http://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B#Operator_precedence
 prechigh
   left  '.'
-  right '!'
+  right 'not'
   left  '*' '/'
   left  '+' '-'
-  left  '>' '>=' '<' '<='
-  left  '==' '!='
-  left  '&&'
-  left  '||'
+  left  'greaterthan' 'greq' 'lessthan' 'lesseq'
+  left  'equals' 'notequals'
+  left  'and'
+  left  'or'
   right '='
   left  ','
 preclow
